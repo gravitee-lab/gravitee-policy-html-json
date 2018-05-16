@@ -23,7 +23,11 @@ import io.gravitee.gateway.api.buffer.Buffer;
 import io.gravitee.gateway.api.http.stream.TransformableResponseStreamBuilder;
 import io.gravitee.gateway.api.http.stream.TransformableStreamBuilder;
 import io.gravitee.gateway.api.stream.ReadWriteStream;
+import io.gravitee.policy.api.ChainScope;
+import io.gravitee.policy.api.annotations.Category;
 import io.gravitee.policy.api.annotations.OnResponseContent;
+import io.gravitee.policy.api.annotations.Policy;
+import io.gravitee.policy.api.annotations.Scope;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -38,6 +42,10 @@ import java.util.stream.Collectors;
  * @author Azize ELAMRANI (azize.elamrani at graviteesource.com)
  * @author GraviteeSource Team
  */
+@Policy(
+        category = @Category(io.gravitee.policy.api.Category.TRANSFORMATION),
+        scope = @Scope(ChainScope.API)
+)
 public class HTMLToJSONTransformationPolicy {
 
     private final static String APPLICATION_JSON = MediaType.APPLICATION_JSON + "; charset=UTF-8";
